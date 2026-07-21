@@ -10,21 +10,23 @@ the meaning of the query without knowing any valid password.
 
 ## Payload to try
 
-Username:
+Username (note the trailing space after `--`, MySQL requires it):
 
 ```
-admin' --
+admin' -- 
 ```
 
 Leave the password field empty and submit.
 
 ## Why it works
 
-The query becomes `SELECT * FROM users WHERE username='admin' --' AND password=''`.
-Everything after `--` is treated as a SQL comment, so the password check is dropped.
+The query becomes `SELECT * FROM users WHERE username='admin' -- ' AND password=''`.
+Everything after `-- ` is treated as a SQL comment, so the password check is dropped.
 The database only checks that a user named `admin` exists, which it does. MySQL runs
 whatever string it is given, it has no way to tell which parts of that string came
-from a web form.
+from a web form. MySQL specifically requires whitespace right after `--` for it to
+start a comment; `admin'--` with no space is not a comment and will not work, which
+trips up this exact payload more than any other database.
 
 ## The fix
 
