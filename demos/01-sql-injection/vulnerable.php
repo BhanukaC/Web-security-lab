@@ -4,6 +4,13 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
+// PHP 8.1+ made mysqli throw on query errors by default (MYSQLI_REPORT_ERROR |
+// MYSQLI_REPORT_STRICT). A malformed injection attempt would otherwise crash
+// with an uncaught mysqli_sql_exception and a raw stack trace instead of
+// falling through to the existing "Invalid login" handling below, which
+// already expects mysqli_query() to return false on error.
+mysqli_report(MYSQLI_REPORT_OFF);
+
 $conn = mysqli_connect('db', 'root', 'root', 'seclab');
 if (!$conn) {
     die('DB connection error: ' . mysqli_connect_error());
