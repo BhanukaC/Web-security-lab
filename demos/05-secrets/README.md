@@ -13,7 +13,7 @@ repository, or a mirror, or a CI log, or a clone from years ago, can read them t
 Run gitleaks against the repository:
 
 ```
-docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:latest detect --source /repo --verbose
+docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:v8.30.1 detect --source /repo --verbose
 ```
 
 It reports a finding in `leaky-config.php`.

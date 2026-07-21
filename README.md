@@ -52,7 +52,7 @@ requests, not to automate attacks.
 
 **gitleaks.** Scans a git repository for secret-shaped strings, including ones that
 were later deleted, since it reads history. Run
-`docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:latest detect --source /repo --verbose`
+`docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:v8.30.1 detect --source /repo --verbose`
 locally, or rely on the `secrets` job in CI.
 
 ## Exercises
