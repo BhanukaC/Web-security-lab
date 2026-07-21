@@ -10,7 +10,7 @@ A teaching lab of five intentionally paired demos, each showing a classic web vu
 - `demos/02-xss/` — stored XSS; `vulnerable.php` echoes stored comments unescaped, `secure.php` escapes with `htmlspecialchars`.
 - `demos/03-csrf/` — `vulnerable.php` accepts POSTed transfers with no verification (paired with `attacker.html`, a self-submitting forged form); `secure.php` adds a per-session CSRF token checked with `hash_equals()`.
 - `demos/04-prompt-injection/` — a FastAPI chatbot ("ShopLK support"). `app.py` (port 8000) is vulnerable to direct and indirect prompt injection and improper output handling; `secure_app.py` (port 8001) is the fixed counterpart. Both call into `llm.py`, a shared provider layer — see below.
-- `demos/05-secrets/` — `leaky-config.php` hardcodes a committed AWS key (`AKIAABCDEFGHIJKLMNOP`); the point is for gitleaks/CI to catch it, not to fix the file.
+- `demos/05-secrets/` — `leaky-config.php` hardcodes a committed AWS key shaped to trigger gitleaks; the point is for gitleaks/CI to catch it, not to fix the file.
 
 Demos 01-03 are plain procedural PHP (`mysqli`), no framework or build step. Demo 04 is Python/FastAPI. Demo 05 is a single static PHP file used as a secrets-scanning target.
 
