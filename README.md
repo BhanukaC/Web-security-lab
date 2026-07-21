@@ -87,11 +87,3 @@ volume mounts are much slower across that boundary.
 same Google Cloud project. If you are using a shared class key, wait a minute and
 retry, or switch to your own key, or set `LLM_PROVIDER=fake` to keep working without
 waiting.
-
-## Repository settings (for the maintainer)
-
-Suggested GitHub description: "Intentionally vulnerable web app lab for teaching SQL
-injection, XSS, CSRF, prompt injection, and secret leakage. Localhost only."
-
-Suggested topics: `web-security`, `owasp`, `sql-injection`, `xss`, `csrf`,
-`prompt-injection`, `security-education`, `appsec`, `teaching`
