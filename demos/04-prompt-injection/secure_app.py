@@ -53,7 +53,9 @@ def chat(payload: ChatRequest, request: Request):
 def summarise_review(payload: ReviewRequest, request: Request):
     _check_rate_limit(request)
     reviews = json.loads(REVIEWS_PATH.read_text())
-    review = next(r for r in reviews if r["order_id"] == payload.order_id)
+    review = next((r for r in reviews if r["order_id"] == payload.order_id), None)
+    if review is None:
+        raise HTTPException(status_code=404, detail=f"No review found for order {payload.order_id}")
     # FIXED: untrusted text is fenced and labelled as data, refund tool removed
     system = (
         "You are the ShopLK review assistant. Summarise the text inside "

@@ -2,7 +2,7 @@
 import json
 from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel
 
@@ -42,7 +42,9 @@ def chat(payload: ChatRequest):
 @app.post("/summarise-review")
 def summarise_review(payload: ReviewRequest):
     reviews = json.loads(REVIEWS_PATH.read_text())
-    review = next(r for r in reviews if r["order_id"] == payload.order_id)
+    review = next((r for r in reviews if r["order_id"] == payload.order_id), None)
+    if review is None:
+        raise HTTPException(status_code=404, detail=f"No review found for order {payload.order_id}")
     # VULNERABLE: untrusted review text can call refund_order with no checks
     reply = generate(
         system="You are the ShopLK review assistant. Summarise the review below.",

@@ -38,8 +38,12 @@ lives.
 without attacking it aggressively. Run it locally against the stack:
 
 ```
-docker run --rm -t owasp/zap2docker-stable zap-baseline.py -t http://host.docker.internal:8080
+docker run --rm -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://host.docker.internal:8080
 ```
+
+`host.docker.internal` resolves out of the box on Docker Desktop (Mac/Windows); on
+native Linux Docker you'll need to add `--add-host=host.docker.internal:host-gateway`
+to the command above, or just use your machine's LAN IP instead.
 
 The same scan runs in CI against demos 01-03 and uploads an HTML report as a build
 artifact.
