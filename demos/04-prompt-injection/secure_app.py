@@ -65,7 +65,7 @@ def summarise_review(payload: ReviewRequest, request: Request):
 
 
 @app.get("/answer", response_class=HTMLResponse)
-def answer(q: str, request: Request):
+def answer(request: Request, q: str = "What are your opening hours?"):
     _check_rate_limit(request)
     reply = generate(system=SYSTEM_PROMPT, user=q)
     safe_reply = html.escape(reply)
