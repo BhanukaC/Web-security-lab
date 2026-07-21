@@ -1,0 +1,8 @@
+repos:
+  - repo: local
+    hooks:
+      - id: gitleaks
+        name: gitleaks
+        entry: docker run --rm -v "$PWD:/repo" zricethezav/gitleaks:latest detect --source /repo --verbose
+        language: system
+        pass_filenames: false
